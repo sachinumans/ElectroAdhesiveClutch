@@ -54,7 +54,7 @@ Moment_Balance_Z_1          = Moment_Balance_Vector_1(3,1);
 
 %Solve for normF_N1
 normF_N1result      = solve(Moment_Balance_Z_1 == 0, normF_N1, 'ReturnConditions', true);
-disp(join(["normF_N1 = ", "", string(subs(simplify(normF_N1result.normF_N1, 'Steps', 100), ...
+disp(join(['normF_N1 = ', '', string(subs(simplify(normF_N1result.normF_N1, 'Steps', 100), ...
     [theta_bar, phi_bar], [theta_bar_def, phi_bar_def]))], newline))
 %% Calculate q_0
 % q_0 is defined as: normF_N1 / normF_Br0
@@ -83,7 +83,7 @@ Moment_Balance_Z_2          = Moment_Balance_Vector_2(3,1);
 
 %Solution for F_N2
 normF_N2result      = solve(Moment_Balance_Z_2 == 0, normF_N2, 'ReturnConditions', true);
-disp(join(["normF_N2 = ", "", string(subs(simplify(normF_N2result.normF_N2, 'Steps', 100), ...
+disp(join(['normF_N2 = ', '', string(subs(simplify(normF_N2result.normF_N2, 'Steps', 100), ...
     [theta_bar, phi_bar], [theta_bar_def, phi_bar_def]))], newline))
 
 %% Calculate q_1

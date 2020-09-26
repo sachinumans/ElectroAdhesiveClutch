@@ -6,6 +6,7 @@ close all
 % This script stores all of variables related to the sensitivity analysis
 % in one struct
 
+%% Step 1 - Enter \Sigma_x, \vec{c} and additional constraints on parameter space
 % Input Variances and covariance matrix
 SensitivityAnalysis.Variance.mu              = 0.02^2;
 SensitivityAnalysis.Variance.phi_1           = (deg2rad(2.5)/3)^2;
@@ -24,18 +25,19 @@ SensitivityAnalysis.Weights.c2  = 5;
 SensitivityAnalysis.Constraint.phi_mindiff      = (2 * pi) / 6;
 SensitivityAnalysis.Constraint.r_fraction_max   = 0.9;
 SensitivityAnalysis.Constraint.normXi           = 2.7;
-SensitivityAnalysis.Constraint.normMu           = 0.62;
+SensitivityAnalysis.Constraint.normMu           = 0.63;
 % note - normXi = normAmpFactor
 
-% Manual configuration to examine
-SensitivityAnalysis.ManualConfig.mu          = 0.6200;
-SensitivityAnalysis.ManualConfig.phi_1       = 0.3899;
-SensitivityAnalysis.ManualConfig.phi_2       = 2.4298;
-SensitivityAnalysis.ManualConfig.r_fraction  = 0.900;
-
-% Starting configuratoin for Optimization
+% Starting configuration for Optimization
 SensitivityAnalysis.Optimization.startstate     = ...
     [0.6, pi/4, 3*pi/4, 0.9];            %mu, phi1, phi2, r_frac
+%% Step 2 - After running Constrained_Optimization_and_Covariances.m enter \vec{\mu}_x
+
+% Manual configuration to examine
+SensitivityAnalysis.ManualConfig.mu          = 0.6300;
+SensitivityAnalysis.ManualConfig.phi_1       = 0.4588;
+SensitivityAnalysis.ManualConfig.phi_2       = 2.3427;
+SensitivityAnalysis.ManualConfig.r_fraction  = 0.900;
 
 % Confidence interval for covariance ellipse
 SensitivityAnalysis.ConfidenceInterval      = sqrt(9.21); 
@@ -48,4 +50,4 @@ SensitivityAnalysis.ConfidenceInterval      = sqrt(9.21);
 
 % Save the configured struct
 save('SensitivityAnalysis.mat', 'SensitivityAnalysis')
-disp("Sensitivity Analysis Structure Successfully Updated")
+disp('Sensitivity Analysis Structure Successfully Updated')

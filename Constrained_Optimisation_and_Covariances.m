@@ -11,8 +11,8 @@ close all
 % Make use of the first and second order taylor approximations
 
 %% Apply constrained optimization
-load("DerivedFactors.mat", "DerivedFactors");
-load("SensitivityAnalysis.mat", "SensitivityAnalysis");
+load('DerivedFactors.mat', 'DerivedFactors');
+load('SensitivityAnalysis.mat', 'SensitivityAnalysis');
 
 % Define symbolic variables
 vars = sym('vars', [1 4]);              %mu, phi_1, phi_2, r_frac
@@ -113,7 +113,7 @@ options                         = optimoptions('fmincon');
 options.ConstraintTolerance     = 1e-8;
 options.StepTolerance           = 1e-10;
 % options.Algorithm              = 'sqp';
-disp("First Order Taylor Approximation of Variations")
+disp('First Order Taylor Approximation of Variations')
 [optim, funValue]       = fmincon(func_Var_combined_1Order, StartPoint, ...
     A, b, Aeq, beq, lb, ub, nonlcon, options)
 
@@ -126,7 +126,7 @@ Covariance_xi_muq_1             = vpa(subs(Variance_1Order(2,1), vars, optim), 5
 Variance_muq_1                  = vpa(subs(Variance_1Order(2,2), vars, optim), 5)
 
 % Repeat the procedure with the second order approximation
-disp("Second Order Taylor Approximation of Variations")
+disp('Second Order Taylor Approximation of Variations')
 nonlcon                         = @local_nonlcon_2order;
 [optim, funValue]       = fmincon(func_Var_combined_2Order, StartPoint, ...
     A, b, Aeq, beq, lb, ub, nonlcon, options)

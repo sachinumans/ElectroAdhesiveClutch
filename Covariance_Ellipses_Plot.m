@@ -12,8 +12,8 @@ close all
 %       - 2nd order Taylor approximation of the function and corresponding
 %       variance
 %       - The Monte-Carlo approximation
-load("DerivedFactors.mat", "DerivedFactors");
-load("SensitivityAnalysis.mat", "SensitivityAnalysis");
+load('DerivedFactors.mat', 'DerivedFactors');
+load('SensitivityAnalysis.mat', 'SensitivityAnalysis');
 
 % Simulation Parameters
 N               = 200;              % number of empirical points to simulate
@@ -28,8 +28,8 @@ conf_interval   = SensitivityAnalysis.ConfidenceInterval;
 
 % Input variances and the corresponding covariance matrix
 Var_mu          = SensitivityAnalysis.Variance.mu;
-Var_phi_1        = SensitivityAnalysis.Variance.phi_1;
-Var_phi_2        = SensitivityAnalysis.Variance.phi_2;
+Var_phi_1       = SensitivityAnalysis.Variance.phi_1;
+Var_phi_2       = SensitivityAnalysis.Variance.phi_2;
 Var_r_fraction  = SensitivityAnalysis.Variance.r_fraction;
 input_covariance_matrix     = SensitivityAnalysis.Variance.covariancematrix;
 
@@ -41,8 +41,8 @@ r_frac_manual   = SensitivityAnalysis.ManualConfig.r_fraction;
 
 % Manual addition of Monte Carlo results if boolean set to true
 MC_bool         = true;
-MC_average      = [2.6909; 0.6302];
-MC_covariance   = [0.0232, 0.0031; 0.0031, 4.265518011552103e-04];
+MC_average      = [2.6997; 0.6313];
+MC_covariance   = [0.0235, 0.0031; 0.0031, 4.2554e-04];
 
 %% Random distribution of points
 % Load the variables stored in DerivedFactors
@@ -132,17 +132,17 @@ p2      = plot(y_ellipse_2order, x_ellipse_2order, 'green', ...
 legendplots     = [p1, p2];
 if MC_bool
     s3  = scatter(MC_average(2), MC_average(1), 30, 'blue', '+');
-    p3  = plot(y_MC, x_MC, 'blue', 'DisplayName', join(["Monte Carlo simulation (N = ", ...
-        string(N), ")"], ""));
+    p3  = plot(y_MC, x_MC, 'blue', 'DisplayName', join(['Monte Carlo simulation (N = ', ...
+        string(N), ')'], ''));
     legendplots     = [p1, p2, p3];
 end
 legend(legendplots, 'Location', 'best', 'Interpreter', 'Latex', 'Fontsize', 11);
 hold('off')
 grid('on')
-% title(join(["Monte Carlo Distribution (N = ", string(N), ...
-%     ") with predicted averages and variances"],""))
-xlabel("$\mu \, q_1$", 'Interpreter', 'Latex')
-ylabel("$\xi$", 'Interpreter', 'Latex')
+% title(join(['Monte Carlo Distribution (N = ', string(N), ...
+%     ') with predicted averages and variances'],''))
+xlabel('$\mu \, q_1$', 'Interpreter', 'Latex')
+ylabel('$\xi$', 'Interpreter', 'Latex')
 
 %% Noise Function
 function [delta] = Nnoise(mean, stddev)

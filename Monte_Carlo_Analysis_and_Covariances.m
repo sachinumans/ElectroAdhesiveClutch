@@ -1,7 +1,7 @@
 clear; clc; close all;
 %% Load factors and variables
 load('DerivedFactors.mat', 'DerivedFactors');
-load("SensitivityAnalysis.mat", "SensitivityAnalysis");
+load('SensitivityAnalysis.mat', 'SensitivityAnalysis');
 
 [~, index_mu, ~]        = find(DerivedFactors.symbolicvariables == 'mu');
 [~, index_phi_1, ~]     = find(DerivedFactors.symbolicvariables == 'phi_1');
@@ -37,7 +37,7 @@ AmpFacFunc  = matlabFunction(DerivedFactors.AmpFactor_nondim);
 MuQ1Func    = matlabFunction(mu*DerivedFactors.q_1_nondim);
 
 dialogueWindow  = waitbar(0, ...
-    "Monte Carlo Simulation - Amplification Factor and mu q_1 (with covariance)");
+    'Monte Carlo Simulation - Amplification Factor and mu q_1 (with covariance)');
 
 % For the manually entered configuration
 local_config.r_frac     = r_frac_manual;
@@ -47,7 +47,7 @@ local_config.mu         = mu_manual;
 
 for i = 1:nc
     waitbar((i / nc), dialogueWindow, ...
-    "Monte Carlo Simulation - Amplification Factor and mu q_1 (with covariance)")
+    'Monte Carlo Simulation - Amplification Factor and mu q_1 (with covariance)')
     % For the amount of simulations per geometry
     % Noise with the specified variance is added to all four factors
     noisyConfig.r_frac  = Nnoise(local_config.r_frac, sqrt(Var_r_fraction));
@@ -82,16 +82,16 @@ configs.covariance_matrix(2,2) = 1 / (nc - 1) * ...
     dot(local_config.results(2,:) - average(2,1), ...
     transpose(local_config.results(2,:) - average(2,1)));
 
-disp(join(["Covariance Matrix after", string(nc), "simulations"]))
+disp(join(['Covariance Matrix after', string(nc), 'simulations']))
 configs.covariance_matrix
 
 if debug_plot
     scatter(local_config.results(2,:), local_config.results(1,:), 10, 'black', '.')    
-    title(join(["Monte Carlo Distribution (N = ", string(nc), ...
-    ")"],""))
+    title(join(['Monte Carlo Distribution (N = ', string(nc), ...
+    ')'],''))
     grid('on')
-    xlabel("$\mu \, q_1$", 'Interpreter', 'Latex')
-    ylabel("$\xi$", 'Interpreter', 'Latex')
+    xlabel('$\mu \, q_1$', 'Interpreter', 'Latex')
+    ylabel('$\xi$', 'Interpreter', 'Latex')
 end
 
 %% Noise function
