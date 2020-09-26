@@ -141,7 +141,7 @@ hold('off')
 grid('on')
 % title(join(['Monte Carlo Distribution (N = ', string(N), ...
 %     ') with predicted averages and variances'],''))
-xlabel('$\mu \, q_1$', 'Interpreter', 'Latex')
+xlabel('$\mu \, q_2$', 'Interpreter', 'Latex')
 ylabel('$\xi$', 'Interpreter', 'Latex')
 
 %% Noise Function

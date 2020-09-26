@@ -90,7 +90,7 @@ if debug_plot
     title(join(['Monte Carlo Distribution (N = ', string(nc), ...
     ')'],''))
     grid('on')
-    xlabel('$\mu \, q_1$', 'Interpreter', 'Latex')
+    xlabel('$\mu \, q_2$', 'Interpreter', 'Latex')
     ylabel('$\xi$', 'Interpreter', 'Latex')
 end
 
